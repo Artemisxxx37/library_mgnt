@@ -1,0 +1,45 @@
+start your mysql server 
+	service mysql start 
+	
+--> create a database named library ; 
+	create database library;
+--> create tables 
+
+	CREATE TABLE login (
+  userid VARCHAR(50) PRIMARY KEY,
+  pass VARCHAR(50) NOT NULL
+);
+
+
+
+	CREATE TABLE student (
+  id INT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  course VARCHAR(50) NOT NULL,
+  branch VARCHAR(50) NOT NULL,
+  semester INT NOT NULL
+);
+
+CREATE TABLE book (
+  id INT PRIMARY KEY IDENTITY(1,1) NOT NULL
+);
+
+
+Once done , grant all privileges to db 
+
+	CREATE USER 'your_username'@'localhost' IDENTIFIED BY 'your_password';
+	GRANT ALL PRIVILEGES ON *.* TO 'your_username'@'localhost';
+
+Now make sure to edit the line of connection in your java project 
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/library", "your_username", "your_password"); according to credentials you're created earlier 
+
+	note: if you're using maven project , you sometimes be faced to errors when trying to get connected ; now just add following lines in your pom.xml
+
+		<path id="classpath">
+    <!-- existing classpath entries -->
+    <pathelement location="lib/mysql-connector-java-8.0.30.jar" />
+</path>
+
+
+That's will be fine  
+	
